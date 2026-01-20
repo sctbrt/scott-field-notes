@@ -114,17 +114,11 @@ class ThemeManager {
             favicon.href = assets[`sb-monogram-${assetSuffix}`];
         }
 
-        // Update Field Notes header logo (if used as site branding)
-        const fieldNotesHeaderLogo = document.querySelector('.field-notes-logo, .archive-logo');
-        if (fieldNotesHeaderLogo) {
-            fieldNotesHeaderLogo.src = assets[`field-notes-logo-${assetSuffix}`];
-        }
-
-        // Update Field Notes archive lockup (hero image)
-        const archiveLockup = document.getElementById('archiveLockup');
-        if (archiveLockup) {
-            archiveLockup.src = assets[`field-notes-lockup-${assetSuffix}`];
-        }
+        // Update Field Notes logos (nav header and archive header)
+        const fieldNotesLogos = document.querySelectorAll('.field-notes-logo, .archive-logo');
+        fieldNotesLogos.forEach(img => {
+            img.src = assets[`field-notes-logo-${assetSuffix}`];
+        });
 
         // Update Max Stewart modal image if it exists
         const maxStewartModalImage = document.getElementById('maxStewartModalImage');

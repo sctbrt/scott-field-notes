@@ -18,8 +18,8 @@
     margin: 0 auto;
 }
 
-.archive-lockup {
-    height: 160px;
+.archive-logo {
+    height: 36px;
     width: auto;
     margin-bottom: 1.5rem;
 }
@@ -220,8 +220,8 @@
         padding: 100px 2rem 40px;
     }
 
-    .archive-lockup {
-        height: 36px;
+    .archive-logo {
+        height: 28px;
     }
 
     .archive-description {
