@@ -1,0 +1,23 @@
+{
+  "name": "scott-field-notes",
+  "version": "1.0.0",
+  "description": "Field Notes — A working archive of systems, drafts, and field observations",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 8002",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.3"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/scott-field-notes.git"
+  },
+  "author": "Scott Bertrand",
+  "license": "MIT"
+}
