@@ -8,6 +8,8 @@ import sbMonogramDark from './assets/sb-monogram-dark.png';
 import sbMonogramLight from './assets/sb-monogram-light.png';
 import wordmarkDark from './assets/scott-bertrand-wordmark-dark.png';
 import wordmarkLight from './assets/scott-bertrand-wordmark-light.png';
+import fieldNotesLogoDark from './assets/field-notes-logo-dark.png';
+import fieldNotesLogoLight from './assets/field-notes-logo-light.png';
 import fieldNotesMenuDark from './assets/field-notes-menu-dark.png';
 import fieldNotesMenuLight from './assets/field-notes-menu-light.png';
 import stillGoodsMenuDark from './assets/still-goods-menu-dark.png';
@@ -23,6 +25,8 @@ const assets = {
     'sb-monogram-light': sbMonogramLight,
     'scott-bertrand-wordmark-dark': wordmarkDark,
     'scott-bertrand-wordmark-light': wordmarkLight,
+    'field-notes-logo-dark': fieldNotesLogoDark,
+    'field-notes-logo-light': fieldNotesLogoLight,
     'field-notes-menu-dark': fieldNotesMenuDark,
     'field-notes-menu-light': fieldNotesMenuLight,
     'still-goods-menu-dark': stillGoodsMenuDark,
@@ -116,6 +120,12 @@ class ThemeManager {
         const stillGoodsModalImage = document.getElementById('stillGoodsModalImage');
         if (stillGoodsModalImage) {
             stillGoodsModalImage.src = assets[`still-goods-${assetSuffix}`];
+        }
+
+        // Update Field Notes header logo (if used as site branding)
+        const fieldNotesHeaderLogo = document.querySelector('.field-notes-logo, .archive-logo');
+        if (fieldNotesHeaderLogo) {
+            fieldNotesHeaderLogo.src = assets[`field-notes-logo-${assetSuffix}`];
         }
 
         // Update navigation menu images
