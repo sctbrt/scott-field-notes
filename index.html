@@ -104,8 +104,19 @@
         </section>
     </main>
 
+    <!-- Still Goods Modal -->
+    <div class="modal" id="stillGoodsModal" aria-hidden="true">
+        <div class="modal-overlay" data-close-modal></div>
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal aria-label="Close">×</button>
+            <img src="assets/still-goods-dark.png" alt="Still Goods" class="modal-image" id="stillGoodsModalImage">
+            <p class="modal-caption">COMING SOON</p>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script type="module" src="theme.js"></script>
+    <script type="module" src="modal.js"></script>
     <script type="module">
         // Fetch and render Field Notes entries
         async function loadEntries() {
