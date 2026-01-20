@@ -33,9 +33,9 @@
                 <a href="https://scottbertrand.com/about.html">About</a>
                 <a href="https://scottbertrand.com/approach.html">Approach</a>
                 <a href="https://scottbertrand.com/focus.html">Focus</a>
-                <button class="nav-imprint-image" data-modal="stillGoodsModal">
+                <a href="https://goods.scottbertrand.com" class="nav-imprint-image">
                     <img src="assets/still-goods-menu-dark.png" alt="Still Goods" class="nav-imprint-img">
-                </button>
+                </a>
             </nav>
 
             <div class="nav-utilities">
@@ -100,19 +100,8 @@
         </section>
     </main>
 
-    <!-- Still Goods Modal -->
-    <div class="modal" id="stillGoodsModal" aria-hidden="true">
-        <div class="modal-overlay" data-close-modal></div>
-        <div class="modal-content">
-            <button class="modal-close" data-close-modal aria-label="Close">×</button>
-            <img src="assets/still-goods-dark.png" alt="Still Goods" class="modal-image" id="stillGoodsModalImage">
-            <p class="modal-caption">COMING SOON</p>
-        </div>
-    </div>
-
     <!-- Scripts -->
     <script type="module" src="theme.js"></script>
-    <script type="module" src="modal.js"></script>
     <script type="module">
         // Fetch and render Field Notes entries
         async function loadEntries() {

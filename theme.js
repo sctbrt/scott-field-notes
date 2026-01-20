@@ -110,18 +110,6 @@ class ThemeManager {
             favicon.href = assets[`sb-monogram-${assetSuffix}`];
         }
 
-        // Update Field Notes modal image if it exists
-        const fieldNotesModalImage = document.querySelector('#fieldNotesModal .modal-image');
-        if (fieldNotesModalImage) {
-            fieldNotesModalImage.src = assets[`field-notes-lockup-${assetSuffix}`];
-        }
-
-        // Update Still Goods modal image if it exists
-        const stillGoodsModalImage = document.getElementById('stillGoodsModalImage');
-        if (stillGoodsModalImage) {
-            stillGoodsModalImage.src = assets[`still-goods-${assetSuffix}`];
-        }
-
         // Update Field Notes header logo (if used as site branding)
         const fieldNotesHeaderLogo = document.querySelector('.field-notes-logo, .archive-logo');
         if (fieldNotesHeaderLogo) {
