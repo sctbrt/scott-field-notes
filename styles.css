@@ -254,6 +254,11 @@ body.modal-active {
     width: auto;
 }
 
+.field-notes-logo {
+    height: 24px;
+    width: auto;
+}
+
 /* Center: Nav Links */
 .nav-menu {
     display: flex;
