@@ -120,6 +120,12 @@ class ThemeManager {
             fieldNotesHeaderLogo.src = assets[`field-notes-logo-${assetSuffix}`];
         }
 
+        // Update Field Notes archive lockup (hero image)
+        const archiveLockup = document.getElementById('archiveLockup');
+        if (archiveLockup) {
+            archiveLockup.src = assets[`field-notes-lockup-${assetSuffix}`];
+        }
+
         // Update Max Stewart modal image if it exists
         const maxStewartModalImage = document.getElementById('maxStewartModalImage');
         if (maxStewartModalImage) {
