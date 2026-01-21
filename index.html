@@ -29,16 +29,30 @@
             </a>
 
             <nav class="nav-menu" id="navMenu">
-                <a href="https://scottbertrand.com">Scott Bertrand</a>
+                <a href="https://scottbertrand.com/#services">Services</a>
+                <a href="https://scottbertrand.com/how-it-works.html">How It Works</a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                        Projects
+                        <span class="dropdown-arrow">▾</span>
+                    </button>
+                    <div class="nav-dropdown-menu" aria-label="Projects submenu" aria-hidden="true">
+                        <a href="/" class="nav-dropdown-item">
+                            <img src="assets/field-notes-menu-dark.png" alt="Field Notes" class="dropdown-brand-img" width="599" height="110">
+                            <span class="dropdown-descriptor">A working archive of systems, drafts, and field observations.</span>
+                        </a>
+                        <a href="https://goods.scottbertrand.com" class="nav-dropdown-item">
+                            <img src="assets/still-goods-menu-dark.png" alt="Still Goods" class="dropdown-brand-img" width="1333" height="283">
+                            <span class="dropdown-descriptor">Objects for everyday use.</span>
+                        </a>
+                        <div class="nav-dropdown-item nav-dropdown-item--disabled">
+                            <img src="assets/maxstewart-dark.png" alt="Max Stewart" class="dropdown-brand-img" width="2100" height="434">
+                            <span class="dropdown-descriptor dropdown-descriptor--coming-soon">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
                 <a href="https://scottbertrand.com/about.html">About</a>
-                <a href="https://scottbertrand.com/approach.html">Approach</a>
-                <a href="https://scottbertrand.com/focus.html">Focus</a>
-                <a href="https://goods.scottbertrand.com" class="nav-imprint-image">
-                    <img src="assets/still-goods-menu-dark.png" alt="Still Goods" class="nav-imprint-img" width="1333" height="283">
-                </a>
-                <button class="nav-imprint-image" data-modal="maxStewartModal">
-                    <img src="assets/maxstewart-dark.png" alt="Max Stewart" class="nav-imprint-img" width="2100" height="434">
-                </button>
+                <a href="https://scottbertrand.com/contact.html">Contact</a>
             </nav>
 
             <div class="nav-utilities">
@@ -113,6 +127,7 @@
     <!-- Scripts -->
     <script type="module" src="theme.js"></script>
     <script type="module" src="modal.js"></script>
+    <script type="module" src="dropdown.js"></script>
     <script type="module">
         // Fetch and render Field Notes entries
         async function loadEntries() {
