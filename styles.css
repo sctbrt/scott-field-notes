@@ -1045,6 +1045,7 @@ body.modal-active {
 /* Dropdown inside collapsed mobile menu */
 .nav--collapsed .nav-menu.active .nav-dropdown {
     width: 100%;
+    position: relative;
 }
 
 .nav--collapsed .nav-menu.active .nav-dropdown-toggle {
@@ -1055,15 +1056,24 @@ body.modal-active {
 }
 
 .nav--collapsed .nav-menu.active .nav-dropdown-menu {
-    position: static;
-    transform: none;
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
     margin: 1rem 0 0 0;
     width: 100%;
+    min-width: auto;
+    max-height: 60vh;
+    overflow-y: auto;
     box-shadow: none;
     border: 1px solid var(--border-subtle);
-    opacity: 1;
-    visibility: visible;
+    border-radius: 8px;
+    background: var(--bg-primary);
+    opacity: 1 !important;
+    visibility: visible !important;
     display: none;
+    z-index: auto;
 }
 
 .nav--collapsed .nav-menu.active .nav-dropdown-menu[aria-hidden="false"] {
