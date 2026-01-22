@@ -244,6 +244,31 @@ body.modal-active {
     width: auto;
 }
 
+/* Theme-based monogram switching
+   Default shows dark assets since JS defaults to light theme (light bg) */
+.brand-monogram--light {
+    display: none;
+}
+
+.brand-monogram--dark {
+    display: block;
+}
+
+[data-theme="dark"] .brand-monogram--light {
+    display: block;
+}
+
+[data-theme="dark"] .brand-monogram--dark {
+    display: none;
+}
+
+.brand-separator {
+    font-size: 0.625rem;
+    color: var(--text-primary);
+    opacity: 0.5;
+    margin: 0 0.2rem;
+}
+
 .brand-tree {
     height: 22px;
     width: auto;
@@ -252,6 +277,24 @@ body.modal-active {
 .brand-wordmark {
     height: 13px;
     width: auto;
+    display: block;
+}
+
+/* Theme-based wordmark switching (same convention as monogram) */
+.brand-wordmark--light {
+    display: none;
+}
+
+.brand-wordmark--dark {
+    display: block;
+}
+
+[data-theme="dark"] .brand-wordmark--light {
+    display: block;
+}
+
+[data-theme="dark"] .brand-wordmark--dark {
+    display: none;
 }
 
 .field-notes-logo {
