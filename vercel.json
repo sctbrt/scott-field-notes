@@ -14,7 +14,7 @@
       "destination": "/api/field-notes/[id].js"
     },
     {
-      "source": "/:id",
+      "source": "/field-notes/:id",
       "destination": "/field-note.html"
     }
   ],

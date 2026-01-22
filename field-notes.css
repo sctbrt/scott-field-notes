@@ -24,6 +24,24 @@
     margin-bottom: 1.5rem;
 }
 
+/* Theme-based archive logo switching
+   Default shows dark logo since light theme has light bg */
+.archive-logo--light {
+    display: none;
+}
+
+.archive-logo--dark {
+    display: block;
+}
+
+[data-theme="dark"] .archive-logo--light {
+    display: block;
+}
+
+[data-theme="dark"] .archive-logo--dark {
+    display: none;
+}
+
 .archive-description {
     font-family: var(--fn-serif);
     font-size: 1.125rem;
