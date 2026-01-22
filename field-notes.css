@@ -137,22 +137,25 @@
     margin-bottom: 0.5rem;
 }
 
-/* List View (default) */
+/* List View */
 .entries-grid.list-view {
     grid-template-columns: 1fr;
 }
 
 .entries-grid.list-view .entry-card {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
-    align-items: start;
     border-bottom: 1px solid rgba(128, 128, 128, 0.15);
     padding-bottom: 2rem;
 }
 
 .entries-grid.list-view .entry-card:last-child {
     border-bottom: none;
+}
+
+.entries-grid.list-view .entry-link {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    align-items: start;
 }
 
 .entries-grid.list-view .entry-thumbnail {
@@ -395,7 +398,7 @@
     }
 
     /* List view on mobile - stack thumbnail above content */
-    .entries-grid.list-view .entry-card {
+    .entries-grid.list-view .entry-link {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
