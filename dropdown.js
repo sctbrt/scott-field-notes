@@ -1,5 +1,5 @@
-// Projects Dropdown Navigation
-// Handles click/keyboard interaction for the Projects dropdown menu
+// Case Studies Dropdown Navigation
+// Handles click/keyboard interaction for the Case Studies dropdown menu
 
 document.addEventListener('DOMContentLoaded', () => {
     const dropdown = document.querySelector('.nav-dropdown');
@@ -7,6 +7,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const menu = document.querySelector('.nav-dropdown-menu');
 
     if (!dropdown || !toggle || !menu) return;
+
+    // Get all focusable elements in the menu
+    const menuLinks = menu.querySelectorAll('a');
+
+    function openDropdown() {
+        toggle.setAttribute('aria-expanded', 'true');
+        menu.setAttribute('aria-hidden', 'false');
+        dropdown.setAttribute('aria-expanded', 'true');
+        // Make links focusable
+        menuLinks.forEach(link => link.removeAttribute('tabindex'));
+    }
+
+    function closeDropdown() {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+        dropdown.setAttribute('aria-expanded', 'false');
+        // Make links not focusable when hidden
+        menuLinks.forEach(link => link.setAttribute('tabindex', '-1'));
+    }
+
+    // Initialize dropdown state (closed)
+    closeDropdown();
 
     // Toggle dropdown on click
     toggle.addEventListener('click', (e) => {
@@ -48,20 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function openDropdown() {
-        toggle.setAttribute('aria-expanded', 'true');
-        menu.setAttribute('aria-hidden', 'false');
-        dropdown.setAttribute('aria-expanded', 'true');
-    }
+    // Handle bfcache (back/forward cache) - reset dropdown state when page is restored
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) {
+            closeDropdown();
+        }
+    });
 
-    function closeDropdown() {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.setAttribute('aria-hidden', 'true');
-        dropdown.setAttribute('aria-expanded', 'false');
-    }
-
-    // Active state logic for Projects dropdown
-    // When on Field Notes or Still Goods (including subdomains), Projects appears active
+    // Active state logic for Case Studies dropdown
+    // When on Field Notes or Still Goods (including subdomains), Case Studies appears active
     const currentHost = window.location.hostname;
     const isProjectSite = currentHost.includes('notes.scottbertrand') ||
                          currentHost.includes('goods.scottbertrand');

@@ -1001,6 +1001,25 @@ body.modal-active {
     opacity: 0.9;
 }
 
+/* Theme switching for dropdown brand images */
+/* --light images have dark text (for light backgrounds) */
+/* --dark images have light text (for dark backgrounds) */
+.dropdown-brand-img--light {
+    display: block;
+}
+
+.dropdown-brand-img--dark {
+    display: none;
+}
+
+[data-theme="dark"] .dropdown-brand-img--light {
+    display: none;
+}
+
+[data-theme="dark"] .dropdown-brand-img--dark {
+    display: block;
+}
+
 .dropdown-descriptor {
     display: block;
     font-size: 0.875rem;
