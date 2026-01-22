@@ -1042,6 +1042,35 @@ body.modal-active {
     }
 }
 
+/* Collapsed nav state (hamburger-on-overflow) */
+.nav--collapsed .nav-menu {
+    display: none;
+}
+
+.nav--collapsed .hamburger {
+    display: flex;
+}
+
+.nav--collapsed .nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-primary);
+    padding: 120px 2rem 2rem;
+    z-index: 9999;
+    gap: 2rem;
+    overflow-y: auto;
+}
+
+.nav--collapsed .nav-menu.active a {
+    font-size: 1.25rem;
+    justify-content: center;
+}
+
 /* Dropdown inside collapsed mobile menu */
 .nav--collapsed .nav-menu.active .nav-dropdown {
     width: 100%;
