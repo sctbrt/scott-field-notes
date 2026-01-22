@@ -1044,9 +1044,14 @@ body.modal-active {
 
 /* Mobile menu styles - using media query for reliable mobile detection */
 @media (max-width: 768px) {
+    .site-header {
+        z-index: 10000;
+    }
+
     .nav-menu.active {
         display: flex;
         flex-direction: column;
+        align-items: stretch;
         position: fixed;
         top: 0;
         left: 0;
@@ -1055,26 +1060,21 @@ body.modal-active {
         background-color: var(--bg-primary);
         padding: 120px 2rem 2rem;
         z-index: 9999;
-        gap: 2rem;
+        gap: 1.5rem;
         overflow-y: auto;
     }
 
-    .nav-menu.active a {
+    .nav-menu.active > a,
+    .nav-menu.active > .nav-dropdown > .nav-dropdown-toggle {
         font-size: 1.25rem;
-        justify-content: center;
+        text-align: left;
+        display: block;
+        width: 100%;
     }
 
     /* Dropdown inside mobile menu */
     .nav-menu.active .nav-dropdown {
         width: 100%;
-        position: relative;
-    }
-
-    .nav-menu.active .nav-dropdown-toggle {
-        width: 100%;
-        justify-content: center;
-        font-size: 1.25rem;
-        min-height: 44px;
     }
 
     .nav-menu.active .nav-dropdown-menu {
