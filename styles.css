@@ -5,13 +5,13 @@
 /* CSS Variables for Theming */
 :root {
     /* Dark theme (default) - Dusky evening sky */
-    --bg-primary: #000000;
+    --bg-primary: #1a1f2e;
     --bg-page: linear-gradient(180deg, #0f1729 0%, #1a1a2e 40%, #16213e 100%);
     --text-primary: #ffffff;
     --text-secondary: #a8a8a8;
     --text-tertiary: #6b6b6b;
-    --border-subtle: #1a1a1a;
-    --border-hover: #4a4a4a;
+    --border-subtle: #2a3040;
+    --border-hover: #4a5060;
     --success-bg: #0d1f0d;
     --success-border: #1e3a1e;
     --success-text: #86efac;
