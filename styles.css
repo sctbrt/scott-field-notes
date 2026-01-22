@@ -1002,22 +1002,22 @@ body.modal-active {
 }
 
 /* Theme switching for dropdown brand images */
-/* --light images have dark text (for light backgrounds) */
-/* --dark images have light text (for dark backgrounds) */
+/* --light class uses -light.png files (white/light colored text) - for dark backgrounds */
+/* --dark class uses -dark.png files (dark colored text) - for light backgrounds */
 .dropdown-brand-img--light {
-    display: block;
+    display: none;
 }
 
 .dropdown-brand-img--dark {
-    display: none;
+    display: block;
 }
 
 [data-theme="dark"] .dropdown-brand-img--light {
-    display: none;
+    display: block;
 }
 
 [data-theme="dark"] .dropdown-brand-img--dark {
-    display: block;
+    display: none;
 }
 
 .dropdown-descriptor {
