@@ -4,8 +4,9 @@
 
 /* CSS Variables for Theming */
 :root {
-    /* Dark theme (default) */
+    /* Dark theme (default) - Dusky evening sky */
     --bg-primary: #000000;
+    --bg-page: linear-gradient(180deg, #0f1729 0%, #1a1a2e 40%, #16213e 100%);
     --text-primary: #ffffff;
     --text-secondary: #a8a8a8;
     --text-tertiary: #6b6b6b;
@@ -17,7 +18,9 @@
 }
 
 [data-theme="light"] {
+    /* Light theme - Blue sky */
     --bg-primary: #ffffff;
+    --bg-page: linear-gradient(180deg, #87CEEB 0%, #b8d4e8 50%, #e8f4f8 100%);
     --text-primary: #000000;
     --text-secondary: #404040;
     --text-tertiary: #6b6b6b;
@@ -44,11 +47,12 @@ html {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background-color: var(--bg-primary);
+    background: var(--bg-page);
+    background-attachment: fixed;
     color: var(--text-primary);
     min-height: 100dvh;
     line-height: 1.5;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 body.modal-active {
