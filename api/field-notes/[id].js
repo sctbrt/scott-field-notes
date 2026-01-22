@@ -47,6 +47,16 @@ export default async function handler(req, res) {
 
     // Transform page data
     const props = page.properties;
+
+    // Extract media/image URL from Files & media property
+    let media = null;
+    const mediaProperty = props.Media || props.Image || props.media || props.image;
+    if (mediaProperty?.files?.length > 0) {
+      const file = mediaProperty.files[0];
+      // Notion files can be external URLs or hosted on Notion
+      media = file.file?.url || file.external?.url || null;
+    }
+
     const entry = {
       id: page.id,
       title: props.Title?.title[0]?.plain_text || 'Untitled',
@@ -55,6 +65,7 @@ export default async function handler(req, res) {
       status: props.Status?.select?.name || 'Working',
       created: props.Created?.date?.start || page.created_time,
       revisited: props['Last revisited']?.date?.start || null,
+      media: media,
       blocks: blocks.results,
     };
 

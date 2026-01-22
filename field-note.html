@@ -86,7 +86,7 @@
         <div class="container">
             <!-- Back link -->
             <nav class="entry-breadcrumb">
-                <a href="/field-notes.html" class="back-link">← Field Notes</a>
+                <a href="/" class="back-link">← Field Notes</a>
             </nav>
 
             <!-- Entry Header -->
@@ -177,7 +177,20 @@
 
                 // Render content blocks
                 const contentContainer = document.getElementById('entryContent');
-                contentContainer.innerHTML = renderBlocks(entry.blocks);
+                let contentHtml = '';
+
+                // Render media image if present (from Files & media property)
+                if (entry.media) {
+                    contentHtml += `
+                        <figure class="entry-image entry-media">
+                            <img src="${entry.media}" alt="${entry.title}" loading="lazy">
+                        </figure>
+                    `;
+                }
+
+                // Render content blocks
+                contentHtml += renderBlocks(entry.blocks);
+                contentContainer.innerHTML = contentHtml;
 
             } catch (error) {
                 console.error('Error loading entry:', error);
@@ -187,7 +200,7 @@
                         <p>Unable to load this entry.</p>
                         <p class="error-detail">${error.message}</p>
                         <button onclick="location.reload()" class="retry-button" style="margin: 1.5rem auto 1rem; display: block; padding: 0.5rem 1.5rem; background: rgba(128, 128, 128, 0.1); border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 4px; color: var(--fn-text); font-family: inherit; cursor: pointer;">Retry</button>
-                        <a href="/field-notes.html" class="back-link" style="display: block; margin-top: 1rem;">← Back to Field Notes</a>
+                        <a href="/" class="back-link" style="display: block; margin-top: 1rem;">← Back to Field Notes</a>
                     </div>
                 `;
             }
