@@ -95,7 +95,26 @@
         <!-- Entries List -->
         <section class="archive-entries">
             <div class="container">
-                <div id="entriesList" class="entries-grid">
+                <!-- View Toggle -->
+                <div class="view-controls">
+                    <button class="view-toggle active" data-view="grid" aria-label="Grid view">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <rect x="1" y="1" width="6" height="6" rx="1"/>
+                            <rect x="9" y="1" width="6" height="6" rx="1"/>
+                            <rect x="1" y="9" width="6" height="6" rx="1"/>
+                            <rect x="9" y="9" width="6" height="6" rx="1"/>
+                        </svg>
+                    </button>
+                    <button class="view-toggle" data-view="list" aria-label="List view">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <rect x="1" y="2" width="14" height="3" rx="1"/>
+                            <rect x="1" y="7" width="14" height="3" rx="1"/>
+                            <rect x="1" y="12" width="14" height="3" rx="1"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="entriesList" class="entries-grid grid-view">
                     <!-- Skeleton loaders -->
                     <div class="skeleton-entry">
                         <div class="skeleton-meta">
@@ -142,10 +161,38 @@
     <script type="module" src="dropdown.js"></script>
     <script type="module" src="modal.js"></script>
     <script type="module">
+        const container = document.getElementById('entriesList');
+        const viewToggles = document.querySelectorAll('.view-toggle');
+        let entriesData = [];
+
+        // View toggle functionality
+        viewToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const view = toggle.dataset.view;
+
+                // Update active state
+                viewToggles.forEach(t => t.classList.remove('active'));
+                toggle.classList.add('active');
+
+                // Update container class
+                container.classList.remove('grid-view', 'list-view');
+                container.classList.add(`${view}-view`);
+
+                // Save preference
+                localStorage.setItem('fieldNotesView', view);
+            });
+        });
+
+        // Restore saved view preference
+        const savedView = localStorage.getItem('fieldNotesView') || 'grid';
+        container.classList.remove('grid-view', 'list-view');
+        container.classList.add(`${savedView}-view`);
+        viewToggles.forEach(t => {
+            t.classList.toggle('active', t.dataset.view === savedView);
+        });
+
         // Fetch and render Field Notes entries
         async function loadEntries() {
-            const container = document.getElementById('entriesList');
-
             try {
                 const response = await fetch('/api/field-notes');
                 const data = await response.json();
@@ -159,32 +206,39 @@
                     return;
                 }
 
-                // Render entries
+                entriesData = data.entries;
+
+                // Render entries with thumbnails
                 container.innerHTML = data.entries.map(entry => `
                     <article class="entry-card">
                         <a href="${entry.url}" class="entry-link">
-                            <div class="entry-meta">
-                                ${entry.type ? `<span class="entry-type">${entry.type}</span>` : ''}
-                                ${entry.status !== 'Working' ? `<span class="entry-status">${entry.status}</span>` : ''}
+                            <div class="entry-thumbnail ${entry.media ? '' : 'entry-thumbnail--empty'}">
+                                ${entry.media ? `<img src="${entry.media}" alt="${entry.title}" loading="lazy">` : ''}
                             </div>
-
-                            <h2 class="entry-title">${entry.title}</h2>
-
-                            ${entry.focus.length > 0 ? `
-                                <div class="entry-focus">
-                                    ${entry.focus.map(f => `<span class="focus-tag">${f}</span>`).join('')}
+                            <div class="entry-content-wrapper">
+                                <div class="entry-meta">
+                                    ${entry.type ? `<span class="entry-type">${entry.type}</span>` : ''}
+                                    ${entry.status !== 'Working' ? `<span class="entry-status">${entry.status}</span>` : ''}
                                 </div>
-                            ` : ''}
 
-                            <div class="entry-dates">
-                                <time datetime="${entry.created}">
-                                    ${formatDate(entry.created)}
-                                </time>
-                                ${entry.revisited ? `
-                                    <span class="revisited">
-                                        · Revisited ${formatDate(entry.revisited)}
-                                    </span>
+                                <h2 class="entry-title">${entry.title}</h2>
+
+                                ${entry.focus.length > 0 ? `
+                                    <div class="entry-focus">
+                                        ${entry.focus.map(f => `<span class="focus-tag">${f}</span>`).join('')}
+                                    </div>
                                 ` : ''}
+
+                                <div class="entry-dates">
+                                    <time datetime="${entry.created}">
+                                        ${formatDate(entry.created)}
+                                    </time>
+                                    ${entry.revisited ? `
+                                        <span class="revisited">
+                                            · Revisited ${formatDate(entry.revisited)}
+                                        </span>
+                                    ` : ''}
+                                </div>
                             </div>
                         </a>
                     </article>
