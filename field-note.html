@@ -7,14 +7,31 @@
     <title>Field Note — Scott Bertrand</title>
     <meta name="description" content="A working archive of systems, drafts, and field observations.">
 
+    <link rel="canonical" href="https://notes.scottbertrand.com/">
+
     <!-- Open Graph -->
     <meta property="og:title" content="Field Note — Scott Bertrand">
     <meta property="og:description" content="A working archive of systems, drafts, and field observations.">
-    <meta property="og:image" content="./assets/og-image.png">
+    <meta property="og:image" content="https://notes.scottbertrand.com/assets/og-image.png">
+    <meta property="og:url" content="https://notes.scottbertrand.com/">
     <meta property="og:type" content="article">
 
-    <!-- Cloudflare Web Analytics -->
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN_HERE"}'></script>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Field Note — Scott Bertrand">
+    <meta name="twitter:description" content="A working archive of systems, drafts, and field observations.">
+    <meta name="twitter:image" content="https://notes.scottbertrand.com/assets/og-image.png">
+
+    <!-- Cloudflare Web Analytics (production only) -->
+    <script>
+    if (location.hostname === 'notes.scottbertrand.com') {
+        var s = document.createElement('script');
+        s.defer = true;
+        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        s.setAttribute('data-cf-beacon', '{"token": "YOUR_CLOUDFLARE_TOKEN_HERE"}');
+        document.head.appendChild(s);
+    }
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/sb-monogram-light.png">
@@ -24,8 +41,11 @@
     <link rel="stylesheet" href="./field-notes.css">
 </head>
 <body>
+    <!-- Menu Backdrop -->
+    <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+
     <!-- Navigation Header -->
-        <header class="site-header">
+    <header class="site-header">
         <div class="nav-container">
             <a href="https://scottbertrand.com/" class="site-brand">
                 <img src="./assets/sb-monogram-light.png" alt="SB" class="brand-monogram brand-monogram--light" width="100" height="100">
@@ -35,7 +55,7 @@
                 <img src="./assets/scott-bertrand-wordmark-dark.png" alt="Scott Bertrand" class="brand-wordmark brand-wordmark--dark" width="400" height="100">
             </a>
 
-            <nav class="nav-menu" id="navMenu">
+            <nav class="nav-menu" id="navMenu" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
                 <button type="button" class="mobile-menu-close" aria-label="Close menu"></button>
                 <a href="https://scottbertrand.com/#services">Services</a>
                 <a href="https://scottbertrand.com/how-it-works.html">How It Works</a>
@@ -124,9 +144,21 @@
         </div>
     </main>
 
+    <!-- Max Stewart Modal -->
+    <div class="modal" id="maxStewartModal" aria-hidden="true">
+        <div class="modal-overlay" data-close-modal></div>
+        <div class="modal-content">
+            <button class="modal-close" data-close-modal aria-label="Close">×</button>
+            <img src="./assets/maxstewart-dark.png" alt="Max Stewart" class="modal-image" id="maxStewartModalImage" width="2100" height="434">
+            <p class="modal-description">A lifestyle brand exploring recipes, home, and everyday craft.</p>
+            <p class="modal-caption">COMING SOON</p>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script type="module" src="./theme.js"></script>
     <script type="module" src="./dropdown.js"></script>
+    <script type="module" src="./modal.js"></script>
     <script type="module">
         // Get entry ID from URL path
         const pathParts = window.location.pathname.split('/');
@@ -136,6 +168,13 @@
         async function loadEntry() {
             try {
                 const response = await fetch(`/api/field-notes/${entryId}`);
+
+                // Handle 404 specifically
+                if (response.status === 404) {
+                    showError('Entry Not Found', 'This field note doesn\'t exist or may have been removed.', false);
+                    return;
+                }
+
                 const entry = await response.json();
 
                 if (!response.ok) {
@@ -198,16 +237,29 @@
 
             } catch (error) {
                 console.error('Error loading entry:', error);
-                document.getElementById('entryTitle').textContent = 'Error Loading Entry';
-                document.getElementById('entryContent').innerHTML = `
-                    <div class="error-state">
-                        <p>Unable to load this entry.</p>
-                        <p class="error-detail">${error.message}</p>
-                        <button onclick="location.reload()" class="retry-button" style="margin: 1.5rem auto 1rem; display: block; padding: 0.5rem 1.5rem; background: rgba(128, 128, 128, 0.1); border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 4px; color: var(--fn-text); font-family: inherit; cursor: pointer;">Retry</button>
-                        <a href="/" class="back-link" style="display: block; margin-top: 1rem;">← Back to Field Notes</a>
-                    </div>
-                `;
+                showError('Error Loading Entry', 'Unable to load this entry. Please try again.', true, error.message);
             }
+        }
+
+        function showError(title, message, showRetry = true, detail = null) {
+            document.getElementById('entryTitle').textContent = title;
+            document.getElementById('entryType').style.display = 'none';
+            document.getElementById('entryStatus').style.display = 'none';
+            document.getElementById('entryFocus').style.display = 'none';
+            document.getElementById('entryCreated').style.display = 'none';
+            document.getElementById('entryRevisited').style.display = 'none';
+
+            let errorHtml = `
+                <div class="error-state">
+                    <p>${message}</p>
+                    ${detail ? `<p class="error-detail">${detail}</p>` : ''}
+                    <div class="error-actions">
+                        ${showRetry ? '<button onclick="location.reload()" class="retry-button">Try Again</button>' : ''}
+                        <a href="/" class="back-link">← Back to Field Notes</a>
+                    </div>
+                </div>
+            `;
+            document.getElementById('entryContent').innerHTML = errorHtml;
         }
 
         function formatDate(dateString) {

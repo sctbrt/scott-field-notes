@@ -591,3 +591,76 @@
         font-size: 1.25rem;
     }
 }
+
+/* Error State */
+.error-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.error-state h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--fn-text);
+}
+
+.error-state p {
+    color: var(--fn-text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.error-state .error-detail {
+    font-size: 0.875rem;
+    font-family: monospace;
+    background: rgba(128, 128, 128, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+}
+
+.error-state .retry-button {
+    display: inline-block;
+    padding: 0.625rem 1.5rem;
+    background: rgba(128, 128, 128, 0.1);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    border-radius: 4px;
+    color: var(--fn-text);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 0.75rem;
+}
+
+.error-state .retry-button:hover {
+    background: rgba(128, 128, 128, 0.15);
+    border-color: rgba(128, 128, 128, 0.3);
+}
+
+.error-state .back-link {
+    display: inline-block;
+    padding: 0.625rem 1.5rem;
+    color: var(--fn-text-secondary);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: color 0.2s ease;
+}
+
+.error-state .back-link:hover {
+    color: var(--fn-text);
+}
+
+.error-state .error-actions {
+    margin-top: 2rem;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .skeleton {
+        animation: none;
+        background: rgba(128, 128, 128, 0.1);
+    }
+}

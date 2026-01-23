@@ -7,14 +7,31 @@
     <title>Field Notes — Scott Bertrand</title>
     <meta name="description" content="A working archive of systems, drafts, and field observations.">
 
+    <link rel="canonical" href="https://notes.scottbertrand.com/">
+
     <!-- Open Graph -->
     <meta property="og:title" content="Field Notes — Scott Bertrand">
     <meta property="og:description" content="A working archive of systems, drafts, and field observations.">
-    <meta property="og:image" content="assets/og-image.png">
+    <meta property="og:image" content="https://notes.scottbertrand.com/assets/og-image.png">
+    <meta property="og:url" content="https://notes.scottbertrand.com/">
     <meta property="og:type" content="website">
 
-    <!-- Cloudflare Web Analytics -->
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_CLOUDFLARE_TOKEN_HERE"}'></script>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Field Notes — Scott Bertrand">
+    <meta name="twitter:description" content="A working archive of systems, drafts, and field observations.">
+    <meta name="twitter:image" content="https://notes.scottbertrand.com/assets/og-image.png">
+
+    <!-- Cloudflare Web Analytics (production only) -->
+    <script>
+    if (location.hostname === 'notes.scottbertrand.com') {
+        var s = document.createElement('script');
+        s.defer = true;
+        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        s.setAttribute('data-cf-beacon', '{"token": "YOUR_CLOUDFLARE_TOKEN_HERE"}');
+        document.head.appendChild(s);
+    }
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/sb-monogram-light.png">
