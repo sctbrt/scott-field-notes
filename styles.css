@@ -1134,8 +1134,10 @@ body.modal-active {
     .nav-menu.active > .nav-dropdown { transition-delay: 120ms; }
     .nav-menu.active > a:nth-of-type(3) { transition-delay: 160ms; }
 
-    /* Close button - X in top right */
-    .mobile-menu-close {
+    /* Close button - X in top right
+       Using .nav-menu .mobile-menu-close for higher specificity to override
+       the base .nav-menu button rule which sets position:relative and border:none */
+    .nav-menu .mobile-menu-close {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1160,17 +1162,17 @@ body.modal-active {
         transition-delay: 100ms;
     }
 
-    .mobile-menu-close::before {
+    .nav-menu .mobile-menu-close::before {
         content: '×';
         font-weight: 300;
         line-height: 1;
     }
 
-    .mobile-menu-close:hover {
+    .nav-menu .mobile-menu-close:hover {
         background: var(--bg-secondary, var(--border-subtle));
     }
 
-    .mobile-menu-close:active {
+    .nav-menu .mobile-menu-close:active {
         background: var(--border-subtle);
     }
 
