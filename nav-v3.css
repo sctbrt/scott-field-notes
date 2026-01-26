@@ -1,0 +1,227 @@
+/* ===== V3 Glass Navigation =====
+   Universal nav component for scottbertrand.com ecosystem
+   ================================= */
+
+:root {
+    --nav-bg: #0F0E0D;
+    --nav-bg-warm: #1a1816;
+    --nav-text: #F5F3F0;
+    --nav-text-muted: #B5B0A8;
+    --nav-text-subtle: #8A847D;
+    --nav-border: rgba(255, 255, 255, 0.08);
+    --nav-color-bertrand: #E07A3A;
+    --nav-font-sans: 'Inter', -apple-system, sans-serif;
+    --nav-radius-lg: 16px;
+    --nav-gutter: clamp(1rem, 4vw, 2rem);
+    --nav-container-max: 1120px;
+}
+
+[data-theme="light"] {
+    --nav-bg: #F8F6F3;
+    --nav-text: #2C2825;
+    --nav-text-muted: #4A4540;
+    --nav-text-subtle: #706A63;
+    --nav-border: rgba(44, 40, 37, 0.12);
+    --nav-color-bertrand: #B54A1A;
+}
+
+/* Header container */
+.header {
+    padding: 0.75rem var(--nav-gutter);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.header.hidden-scroll {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+/* Glass container with RGB lighting */
+.header__glass {
+    max-width: var(--nav-container-max);
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    background: color-mix(in srgb, var(--nav-bg) 20%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--nav-border);
+    border-radius: var(--nav-radius-lg);
+    position: relative;
+    overflow: hidden;
+    /* Dynamic lighting positions - updated by JS */
+    --red-pos: 20%;
+    --yellow-pos: 50%;
+    --blue-pos: 75%;
+}
+
+/* Reactive primary color ambient lighting */
+.header__glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse 250px 80px at var(--red-pos) 70%, var(--light-red, transparent), transparent),
+        radial-gradient(ellipse 200px 90px at var(--yellow-pos) 50%, var(--light-yellow, transparent), transparent),
+        radial-gradient(ellipse 250px 80px at var(--blue-pos) 30%, var(--light-blue, transparent), transparent);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 2s ease-out;
+    border-radius: inherit;
+}
+
+.header.lights-on .header__glass::before {
+    opacity: 1;
+}
+
+/* Light intensities by theme */
+[data-theme="dark"] .header.lights-on .header__glass,
+.header.lights-on .header__glass {
+    --light-red: rgba(220, 53, 53, 0.14);
+    --light-yellow: rgba(220, 180, 50, 0.08);
+    --light-blue: rgba(50, 100, 220, 0.11);
+}
+
+[data-theme="light"] .header.lights-on .header__glass {
+    --light-red: rgba(220, 53, 53, 0.07);
+    --light-yellow: rgba(220, 180, 50, 0.04);
+    --light-blue: rgba(50, 100, 220, 0.055);
+}
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Logo */
+.header__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--nav-text);
+}
+
+.header__logo-mark {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.header__logo-divider {
+    color: var(--nav-text-subtle);
+    font-weight: 200;
+    opacity: 0.4;
+}
+
+.header__logo-text {
+    font-family: var(--nav-font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--nav-text);
+}
+
+/* Navigation links */
+.header__nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.header__link {
+    font-family: var(--nav-font-sans);
+    font-size: 0.875rem;
+    color: var(--nav-text-muted);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: color 0.2s;
+}
+
+.header__link:hover {
+    color: var(--nav-text);
+}
+
+.header__link--primary {
+    color: var(--nav-color-bertrand);
+    font-weight: 500;
+}
+
+/* Ghosted link - coming soon state */
+.header__link--ghosted {
+    opacity: 0.5;
+    position: relative;
+    cursor: pointer;
+}
+
+.header__link--ghosted:hover {
+    opacity: 0.7;
+}
+
+.header__link-soon {
+    display: block;
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--nav-text-subtle);
+    opacity: 0.7;
+    margin-top: 0.125rem;
+}
+
+/* SB Monogram adjustments */
+.sb-monogram {
+    display: block;
+    object-fit: contain;
+    filter: brightness(2) contrast(1.1);
+}
+
+[data-theme="light"] .sb-monogram {
+    filter: brightness(0) saturate(100%);
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+    .header {
+        padding: 0.5rem var(--nav-gutter);
+    }
+    .header__glass {
+        padding: 0.625rem 1rem;
+    }
+    .header__logo-text {
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+    }
+    .header__logo-divider {
+        display: none;
+    }
+    .header__nav {
+        gap: 1rem;
+    }
+    .header__link {
+        font-size: 0.75rem;
+    }
+    .header__link-soon {
+        display: none;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .header,
+    .header__glass::before {
+        transition: none;
+    }
+}

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark">
     <title>Field Note — Scott Bertrand</title>
     <meta name="description" content="A working archive of systems, drafts, and field observations.">
 
@@ -22,86 +21,37 @@
     <meta name="twitter:description" content="A working archive of systems, drafts, and field observations.">
     <meta name="twitter:image" content="https://notes.scottbertrand.com/assets/og-image.png">
 
-    <!-- Cloudflare Web Analytics (production only) -->
-    <script>
-    if (location.hostname === 'notes.scottbertrand.com') {
-        var s = document.createElement('script');
-        s.defer = true;
-        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-        s.setAttribute('data-cf-beacon', '{"token": "YOUR_CLOUDFLARE_TOKEN_HERE"}');
-        document.head.appendChild(s);
-    }
-    </script>
-
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./assets/sb-monogram-light.png">
+    <link rel="icon" type="image/png" href="./assets/sb-dotted-logomark.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./field-notes.css">
+    <link rel="stylesheet" href="./nav-v3.css">
 </head>
 <body>
-    <!-- Menu Backdrop -->
-    <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
-
-    <!-- Navigation Header -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="https://scottbertrand.com/" class="site-brand">
-                <img src="./assets/sb-monogram-light.png" alt="SB" class="brand-monogram brand-monogram--light" width="100" height="100">
-                <img src="./assets/sb-monogram-dark.png" alt="SB" class="brand-monogram brand-monogram--dark" width="100" height="100">
-                <span class="brand-separator">|</span>
-                <img src="./assets/scott-bertrand-wordmark-light.png" alt="Scott Bertrand" class="brand-wordmark brand-wordmark--light" width="400" height="100">
-                <img src="./assets/scott-bertrand-wordmark-dark.png" alt="Scott Bertrand" class="brand-wordmark brand-wordmark--dark" width="400" height="100">
-            </a>
-
-            <nav class="nav-menu" id="navMenu" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
-                <button type="button" class="mobile-menu-close" aria-label="Close menu"></button>
-                <a href="https://scottbertrand.com/#services">Services</a>
-                <a href="https://scottbertrand.com/how-it-works.html">How It Works</a>
-                <a href="https://scottbertrand.com/about.html">About</a>
-                <div class="nav-dropdown">
-                    <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-                        Case Studies
-                        <span class="dropdown-arrow">▾</span>
-                    </button>
-                    <div class="nav-dropdown-menu" role="menu" aria-hidden="true">
-                        <a href="https://notes.scottbertrand.com/" class="nav-dropdown-item">
-                            <div class="dropdown-item-header">
-                                <img src="./assets/field-notes-menu-light.png" alt="Field Notes" class="dropdown-brand-img dropdown-brand-img--light" width="599" height="110">
-                                <img src="./assets/field-notes-menu-dark.png" alt="Field Notes" class="dropdown-brand-img dropdown-brand-img--dark" width="599" height="110">
-                            </div>
-                            <span class="dropdown-descriptor">Working archive · essays · systems</span>
-                        </a>
-                        <a href="https://goods.scottbertrand.com/" class="nav-dropdown-item">
-                            <div class="dropdown-item-header">
-                                <img src="./assets/still-goods-menu-light.png" alt="Still Goods" class="dropdown-brand-img dropdown-brand-img--light" width="1333" height="283">
-                                <img src="./assets/still-goods-menu-dark.png" alt="Still Goods" class="dropdown-brand-img dropdown-brand-img--dark" width="1333" height="283">
-                            </div>
-                            <span class="dropdown-descriptor">Seasonal objects · limited issues</span>
-                        </a>
-                        <a href="https://maxstewart.life/" class="nav-dropdown-item nav-dropdown-item--disabled">
-                            <div class="dropdown-item-header">
-                                <img src="./assets/maxstewart-light.png" alt="Max Stewart" class="dropdown-brand-img dropdown-brand-img--light" width="2100" height="434">
-                                <img src="./assets/maxstewart-dark.png" alt="Max Stewart" class="dropdown-brand-img dropdown-brand-img--dark" width="2100" height="434">
-                            </div>
-                            <span class="dropdown-descriptor dropdown-descriptor--coming-soon">Coming Soon</span>
-                        </a>
-                    </div>
-                </div>
-                <a href="https://scottbertrand.com/contact.html">Contact</a>
-            </nav>
-
-            <div class="nav-utilities">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <span class="theme-icon">◐</span>
-                </button>
-
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+    <!-- V3 Glass Navigation -->
+    <header class="header visible lights-on">
+        <div class="header__glass">
+            <div class="header__inner">
+                <a href="https://scottbertrand.com/" class="header__logo">
+                    <img src="./assets/sb-dotted-logomark.png" alt="SB" class="header__logo-mark sb-monogram" width="50" height="32">
+                    <span class="header__logo-divider">|</span>
+                    <span class="header__logo-text">Scott Bertrand</span>
+                </a>
+                <nav class="header__nav">
+                    <a href="https://scottbertrand.com/#design-studio" class="header__link header__link--primary header__link--ghosted">
+                        Bertrand Brands
+                        <span class="header__link-soon">Coming Soon</span>
+                    </a>
+                    <a href="https://scottbertrand.com/#ventures" class="header__link">Ventures</a>
+                    <a href="https://scottbertrand.com/#contact" class="header__link">Contact</a>
+                </nav>
             </div>
         </div>
     </header>
@@ -363,5 +313,6 @@
         loadEntry();
     </script>
     <script type="module" src="/src/scripts/visitor-notify.js"></script>
+    <script src="./nav-v3.js"></script>
 </body>
 </html>
