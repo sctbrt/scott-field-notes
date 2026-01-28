@@ -10,6 +10,8 @@ export default defineConfig({
       input: {
         main: 'index.html',
         'field-note': 'field-note.html',
+        'nav-test': 'nav-test.html',
+        'workbench': 'workbench.html',
       },
     },
   },
