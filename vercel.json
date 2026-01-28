@@ -20,6 +20,10 @@
     {
       "source": "/workbench",
       "destination": "/workbench.html"
+    },
+    {
+      "source": "/nav-test",
+      "destination": "/nav-test.html"
     }
   ],
   "headers": [
