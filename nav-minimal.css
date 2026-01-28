@@ -1,0 +1,156 @@
+/* ===== Minimal Inline Navigation =====
+   Simple text links, no background, editorial feel
+   ================================= */
+
+.nav-minimal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1.5rem var(--fn-gutter, 2rem);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.nav-minimal.is-hidden {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+}
+
+.nav-minimal__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.nav-minimal__logo {
+    text-decoration: none;
+}
+
+.nav-minimal__logo-img {
+    height: 20px;
+    width: auto;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+}
+
+.nav-minimal__logo:hover .nav-minimal__logo-img {
+    opacity: 1;
+}
+
+/* Theme logo switching - dark theme shows light logo */
+.nav-minimal__logo-img--light { display: none; }
+.nav-minimal__logo-img--dark { display: block; }
+
+[data-theme="light"] .nav-minimal__logo-img--light { display: block; }
+[data-theme="light"] .nav-minimal__logo-img--dark { display: none; }
+
+/* Links */
+.nav-minimal__links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-minimal__link {
+    font-family: var(--fn-font-sans, 'Inter', sans-serif);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--fn-text-muted, #888);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.nav-minimal__link:hover {
+    color: var(--fn-text, #f5f3f0);
+}
+
+.nav-minimal__link--active {
+    color: var(--fn-text, #f5f3f0);
+}
+
+/* Subtle underline on hover */
+.nav-minimal__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0.25rem;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav-minimal__link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Divider */
+.nav-minimal__divider {
+    width: 1px;
+    height: 16px;
+    background: var(--fn-border, rgba(255,255,255,0.1));
+}
+
+/* Theme Toggle */
+.nav-minimal__theme {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: var(--fn-text-muted, #888);
+    font-size: 1rem;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.nav-minimal__theme:hover {
+    color: var(--fn-text, #f5f3f0);
+    transform: rotate(15deg);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .nav-minimal {
+        padding: 1rem;
+    }
+
+    .nav-minimal__links {
+        gap: 1.25rem;
+    }
+
+    .nav-minimal__link {
+        font-size: 0.75rem;
+    }
+
+    .nav-minimal__divider {
+        display: none;
+    }
+}
+
+/* Light theme adjustments */
+[data-theme="light"] .nav-minimal__link {
+    color: var(--fn-text-muted, #666);
+}
+
+[data-theme="light"] .nav-minimal__link:hover,
+[data-theme="light"] .nav-minimal__link--active {
+    color: var(--fn-text, #1a1a1a);
+}
+
+[data-theme="light"] .nav-minimal__theme {
+    color: var(--fn-text-muted, #666);
+}
+
+[data-theme="light"] .nav-minimal__theme:hover {
+    color: var(--fn-text, #1a1a1a);
+}

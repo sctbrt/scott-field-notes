@@ -1,0 +1,268 @@
+/* ===== Floating Index Navigation =====
+   Small floating button → expands to table of contents
+   ================================= */
+
+/* Floating Trigger */
+.nav-index__trigger {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--fn-bg-elevated, #1a1a1a);
+    border: 1px solid var(--fn-border, rgba(255,255,255,0.1));
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-index__trigger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 32px rgba(0,0,0,0.4);
+}
+
+.nav-index__trigger-icon {
+    width: 18px;
+    height: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-index__trigger-line {
+    height: 2px;
+    background: var(--fn-text, #f5f3f0);
+    border-radius: 1px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-index__trigger-line:nth-child(1) { width: 100%; }
+.nav-index__trigger-line:nth-child(2) { width: 70%; }
+.nav-index__trigger-line:nth-child(3) { width: 40%; }
+
+/* Trigger open state */
+.nav-index.is-open .nav-index__trigger-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.nav-index.is-open .nav-index__trigger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-index.is-open .nav-index__trigger-line:nth-child(3) {
+    width: 100%;
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Panel */
+.nav-index__panel {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 2rem;
+    z-index: 999;
+    width: 280px;
+    max-height: calc(100vh - 8rem);
+    background: var(--fn-bg-elevated, #1a1a1a);
+    border: 1px solid var(--fn-border, rgba(255,255,255,0.1));
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.95);
+    transform-origin: bottom right;
+    transition: opacity 0.25s, visibility 0.25s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-index.is-open .nav-index__panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Panel Header */
+.nav-index__header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--fn-border, rgba(255,255,255,0.06));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-index__logo {
+    height: 16px;
+    width: auto;
+    opacity: 0.9;
+}
+
+/* Theme logo switching */
+.nav-index__logo--light { display: none; }
+.nav-index__logo--dark { display: block; }
+
+[data-theme="light"] .nav-index__logo--light { display: block; }
+[data-theme="light"] .nav-index__logo--dark { display: none; }
+
+.nav-index__theme {
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    color: var(--fn-text-muted, #888);
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.nav-index__theme:hover {
+    color: var(--fn-text, #f5f3f0);
+}
+
+/* Panel Content */
+.nav-index__content {
+    padding: 0.75rem 0;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+/* Section */
+.nav-index__section {
+    padding: 0.5rem 1.25rem 0.25rem;
+}
+
+.nav-index__section-label {
+    font-family: var(--fn-font-sans, 'Inter', sans-serif);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fn-text-muted, #555);
+}
+
+/* Links */
+.nav-index__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-index__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--fn-font-sans, 'Inter', sans-serif);
+    font-size: 0.875rem;
+    color: var(--fn-text-muted, #aaa);
+    text-decoration: none;
+    padding: 0.625rem 1.25rem;
+    transition: color 0.2s, background 0.2s;
+}
+
+.nav-index__link:hover {
+    color: var(--fn-text, #f5f3f0);
+    background: rgba(255,255,255,0.04);
+}
+
+.nav-index__link--active {
+    color: var(--fn-text, #f5f3f0);
+}
+
+.nav-index__link-icon {
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
+.nav-index__link-arrow {
+    margin-left: auto;
+    font-size: 0.75rem;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.nav-index__link:hover .nav-index__link-arrow {
+    opacity: 0.5;
+    transform: translateX(0);
+}
+
+/* Divider */
+.nav-index__divider {
+    height: 1px;
+    background: var(--fn-border, rgba(255,255,255,0.06));
+    margin: 0.5rem 1.25rem;
+}
+
+/* Panel Footer */
+.nav-index__footer {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--fn-border, rgba(255,255,255,0.06));
+}
+
+.nav-index__footer-link {
+    font-family: var(--fn-font-sans, 'Inter', sans-serif);
+    font-size: 0.75rem;
+    color: var(--fn-text-muted, #666);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-index__footer-link:hover {
+    color: var(--fn-text, #f5f3f0);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .nav-index__trigger {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
+    }
+
+    .nav-index__panel {
+        bottom: 4.5rem;
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+    }
+}
+
+/* Light theme */
+[data-theme="light"] .nav-index__trigger {
+    background: var(--fn-bg-elevated, #fff);
+    border-color: var(--fn-border, rgba(0,0,0,0.1));
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+}
+
+[data-theme="light"] .nav-index__trigger-line {
+    background: var(--fn-text, #1a1a1a);
+}
+
+[data-theme="light"] .nav-index__panel {
+    background: var(--fn-bg-elevated, #fff);
+    border-color: var(--fn-border, rgba(0,0,0,0.1));
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+
+[data-theme="light"] .nav-index__link:hover {
+    background: rgba(0,0,0,0.04);
+}
+
+/* Backdrop */
+.nav-index__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s;
+}
+
+.nav-index.is-open .nav-index__backdrop {
+    opacity: 1;
+    visibility: visible;
+}

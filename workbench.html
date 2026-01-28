@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Workbench — Field Notes — Scott Bertrand</title>
+    <meta name="description" content="An interactive canvas exploring systems, drafts, and field observations.">
+
+    <link rel="canonical" href="https://notes.scottbertrand.com/workbench">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Workbench — Field Notes">
+    <meta property="og:description" content="An interactive canvas exploring systems, drafts, and field observations.">
+    <meta property="og:image" content="https://notes.scottbertrand.com/assets/og-image.png">
+    <meta property="og:url" content="https://notes.scottbertrand.com/workbench">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/sb-dotted-logomark.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="workbench.css">
+</head>
+<body>
+    <!-- Loading State -->
+    <div class="workbench__loading">
+        <p class="workbench__loading-text">Loading workbench...</p>
+    </div>
+
+    <!-- Main Workbench Canvas -->
+    <div class="workbench" data-zoom="normal">
+        <!-- Graph Paper Background -->
+        <div class="workbench__grid"></div>
+
+        <!-- Canvas (transforms with pan/zoom) -->
+        <div class="workbench__canvas">
+            <!-- Artifacts will be rendered here -->
+        </div>
+    </div>
+
+    <!-- UI Overlay -->
+    <div class="workbench-ui">
+        <!-- Back Navigation -->
+        <nav class="workbench__nav">
+            <a href="/" class="workbench__back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Field Notes
+            </a>
+        </nav>
+
+        <!-- Zoom Controls -->
+        <div class="workbench__controls">
+            <button class="workbench__zoom-btn" data-zoom-in aria-label="Zoom in">+</button>
+            <span class="workbench__zoom-level">60%</span>
+            <button class="workbench__zoom-btn" data-zoom-out aria-label="Zoom out">−</button>
+            <button class="workbench__zoom-btn workbench__reset" data-zoom-reset aria-label="Reset view">⌂</button>
+        </div>
+
+        <!-- Timeline Slider -->
+        <div class="workbench__timeline">
+            <span class="workbench__timeline-label">Timeline</span>
+            <input
+                type="range"
+                class="workbench__timeline-slider"
+                min="0"
+                max="100"
+                value="100"
+                aria-label="Timeline filter"
+            >
+            <span class="workbench__timeline-date">Present</span>
+        </div>
+    </div>
+
+    <!-- Theme Script (inline for immediate execution) -->
+    <script>
+        // Check for saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+    </script>
+
+    <!-- Main Workbench Script -->
+    <script src="workbench.js"></script>
+</body>
+</html>

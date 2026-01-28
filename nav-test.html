@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Test — Field Notes</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Base styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="field-notes.css">
+
+    <style>
+        /* Test page styles */
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .test-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .test-title {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--fn-text);
+        }
+
+        .test-subtitle {
+            font-size: 1rem;
+            color: var(--fn-text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .test-nav-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .test-nav-btn {
+            padding: 0.75rem 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: transparent;
+            border: 1px solid var(--fn-border, rgba(255,255,255,0.1));
+            border-radius: 8px;
+            color: var(--fn-text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .test-nav-btn:hover {
+            border-color: var(--fn-border-hover, rgba(255,255,255,0.2));
+            color: var(--fn-text);
+        }
+
+        .test-nav-btn.active {
+            background: var(--fn-text);
+            border-color: var(--fn-text);
+            color: var(--fn-bg);
+        }
+
+        .test-description {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--fn-border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .test-description h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--fn-text);
+        }
+
+        .test-description p {
+            font-size: 0.9375rem;
+            color: var(--fn-text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .test-content {
+            margin-top: 4rem;
+        }
+
+        .test-content h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--fn-text);
+        }
+
+        .test-content p {
+            font-size: 1rem;
+            color: var(--fn-text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Hide all navs by default */
+        .nav-minimal,
+        .nav-rail,
+        .nav-index,
+        .nav-cmd {
+            display: none;
+        }
+
+        /* Show active nav */
+        .show-minimal .nav-minimal { display: block; }
+        .show-rail .nav-rail { display: flex; }
+        .show-index .nav-index { display: block; }
+        .show-command .nav-cmd { display: block; }
+
+        /* Adjust body for rail nav */
+        .show-rail .test-container {
+            margin-left: 200px;
+        }
+
+        @media (max-width: 900px) {
+            .show-rail .test-container {
+                margin-left: 0;
+                padding-bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body class="show-minimal">
+
+    <!-- ========== 1. MINIMAL INLINE NAV ========== -->
+    <link rel="stylesheet" href="nav-minimal.css">
+    <header class="nav-minimal">
+        <div class="nav-minimal__inner">
+            <a href="/" class="nav-minimal__logo">
+                <img src="assets/field-notes-logo-dark.png" alt="Field Notes" class="nav-minimal__logo-img nav-minimal__logo-img--dark">
+                <img src="assets/field-notes-logo-light.png" alt="Field Notes" class="nav-minimal__logo-img nav-minimal__logo-img--light">
+            </a>
+            <nav class="nav-minimal__links">
+                <a href="/" class="nav-minimal__link nav-minimal__link--active">Archive</a>
+                <a href="/workbench" class="nav-minimal__link">Workbench</a>
+                <span class="nav-minimal__divider"></span>
+                <a href="https://scottbertrand.com" class="nav-minimal__link">Portfolio</a>
+                <button class="nav-minimal__theme" aria-label="Toggle theme">☀</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 2. SIDE RAIL NAV ========== -->
+    <link rel="stylesheet" href="nav-rail.css">
+    <aside class="nav-rail">
+        <a href="/" class="nav-rail__logo">
+            <img src="assets/field-notes-logo-dark.png" alt="Field Notes" class="nav-rail__logo-img nav-rail__logo-img--dark">
+            <img src="assets/field-notes-logo-light.png" alt="Field Notes" class="nav-rail__logo-img nav-rail__logo-img--light">
+        </a>
+
+        <p class="nav-rail__section">Navigate</p>
+        <ul class="nav-rail__links">
+            <li><a href="/" class="nav-rail__link nav-rail__link--active">Archive</a></li>
+            <li><a href="/workbench" class="nav-rail__link">Workbench</a></li>
+        </ul>
+
+        <p class="nav-rail__section">External</p>
+        <ul class="nav-rail__links">
+            <li><a href="https://scottbertrand.com" class="nav-rail__link">Portfolio</a></li>
+            <li><a href="https://goods.scottbertrand.com" class="nav-rail__link">Still Goods</a></li>
+        </ul>
+
+        <div class="nav-rail__spacer"></div>
+
+        <div class="nav-rail__footer">
+            <a href="mailto:hello@bertrandbrands.com" class="nav-rail__footer-link">Contact</a>
+            <button class="nav-rail__theme">
+                <span>☀</span>
+                <span>Toggle theme</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ========== 3. FLOATING INDEX NAV ========== -->
+    <link rel="stylesheet" href="nav-index.css">
+    <div class="nav-index">
+        <div class="nav-index__backdrop"></div>
+
+        <button class="nav-index__trigger" aria-label="Open navigation">
+            <span class="nav-index__trigger-icon">
+                <span class="nav-index__trigger-line"></span>
+                <span class="nav-index__trigger-line"></span>
+                <span class="nav-index__trigger-line"></span>
+            </span>
+        </button>
+
+        <div class="nav-index__panel">
+            <div class="nav-index__header">
+                <img src="assets/field-notes-logo-dark.png" alt="Field Notes" class="nav-index__logo nav-index__logo--dark">
+                <img src="assets/field-notes-logo-light.png" alt="Field Notes" class="nav-index__logo nav-index__logo--light">
+                <button class="nav-index__theme" aria-label="Toggle theme">☀</button>
+            </div>
+
+            <div class="nav-index__content">
+                <div class="nav-index__section">
+                    <p class="nav-index__section-label">Field Notes</p>
+                </div>
+                <ul class="nav-index__links">
+                    <li><a href="/" class="nav-index__link nav-index__link--active">
+                        <span class="nav-index__link-icon">📚</span>
+                        <span>Archive</span>
+                        <span class="nav-index__link-arrow">→</span>
+                    </a></li>
+                    <li><a href="/workbench" class="nav-index__link">
+                        <span class="nav-index__link-icon">🔧</span>
+                        <span>Workbench</span>
+                        <span class="nav-index__link-arrow">→</span>
+                    </a></li>
+                </ul>
+
+                <div class="nav-index__divider"></div>
+
+                <div class="nav-index__section">
+                    <p class="nav-index__section-label">Ecosystem</p>
+                </div>
+                <ul class="nav-index__links">
+                    <li><a href="https://scottbertrand.com" class="nav-index__link">
+                        <span class="nav-index__link-icon">🏠</span>
+                        <span>Portfolio</span>
+                        <span class="nav-index__link-arrow">→</span>
+                    </a></li>
+                    <li><a href="https://goods.scottbertrand.com" class="nav-index__link">
+                        <span class="nav-index__link-icon">🛍</span>
+                        <span>Still Goods</span>
+                        <span class="nav-index__link-arrow">→</span>
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-index__footer">
+                <a href="mailto:hello@bertrandbrands.com" class="nav-index__footer-link">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 4. COMMAND LINE NAV ========== -->
+    <link rel="stylesheet" href="nav-command.css">
+    <div class="nav-cmd">
+        <div class="nav-cmd__backdrop"></div>
+
+        <button class="nav-cmd__hint">
+            <span class="nav-cmd__hint-key">/</span>
+            <span class="nav-cmd__hint-text">Quick navigation</span>
+        </button>
+
+        <div class="nav-cmd__palette">
+            <div class="nav-cmd__search">
+                <span class="nav-cmd__search-icon">⌘</span>
+                <input type="text" class="nav-cmd__input" placeholder="Type a command or search..." autofocus>
+                <span class="nav-cmd__search-hint">esc</span>
+            </div>
+
+            <div class="nav-cmd__results">
+                <div class="nav-cmd__section">
+                    <p class="nav-cmd__section-label">Navigate</p>
+                </div>
+                <ul class="nav-cmd__items">
+                    <li class="nav-cmd__item is-selected" data-href="/">
+                        <span class="nav-cmd__item-icon">📚</span>
+                        <span class="nav-cmd__item-text">Archive</span>
+                        <span class="nav-cmd__item-shortcut"><kbd>G</kbd><kbd>A</kbd></span>
+                    </li>
+                    <li class="nav-cmd__item" data-href="/workbench">
+                        <span class="nav-cmd__item-icon">🔧</span>
+                        <span class="nav-cmd__item-text">Workbench</span>
+                        <span class="nav-cmd__item-shortcut"><kbd>G</kbd><kbd>W</kbd></span>
+                    </li>
+                </ul>
+
+                <div class="nav-cmd__section">
+                    <p class="nav-cmd__section-label">External</p>
+                </div>
+                <ul class="nav-cmd__items">
+                    <li class="nav-cmd__item" data-href="https://scottbertrand.com">
+                        <span class="nav-cmd__item-icon">🏠</span>
+                        <span class="nav-cmd__item-text">Portfolio</span>
+                        <span class="nav-cmd__item-shortcut"><kbd>G</kbd><kbd>P</kbd></span>
+                    </li>
+                    <li class="nav-cmd__item" data-href="https://goods.scottbertrand.com">
+                        <span class="nav-cmd__item-icon">🛍</span>
+                        <span class="nav-cmd__item-text">Still Goods</span>
+                        <span class="nav-cmd__item-shortcut"><kbd>G</kbd><kbd>S</kbd></span>
+                    </li>
+                </ul>
+
+                <div class="nav-cmd__section">
+                    <p class="nav-cmd__section-label">Actions</p>
+                </div>
+                <ul class="nav-cmd__items">
+                    <li class="nav-cmd__item" data-action="theme">
+                        <span class="nav-cmd__item-icon">◐</span>
+                        <span class="nav-cmd__item-text">Toggle theme</span>
+                        <span class="nav-cmd__item-shortcut"><kbd>T</kbd></span>
+                    </li>
+                    <li class="nav-cmd__item" data-href="mailto:hello@bertrandbrands.com">
+                        <span class="nav-cmd__item-icon">✉</span>
+                        <span class="nav-cmd__item-text">Contact</span>
+                        <span class="nav-cmd__item-shortcut"><kbd>C</kbd></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-cmd__footer">
+                <div class="nav-cmd__footer-hint">
+                    <span><kbd>↑↓</kbd> navigate</span>
+                    <span><kbd>↵</kbd> select</span>
+                    <span><kbd>esc</kbd> close</span>
+                </div>
+                <button class="nav-cmd__theme" aria-label="Toggle theme">☀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div class="test-container">
+        <header class="test-header">
+            <h1 class="test-title">Navigation Styles</h1>
+            <p class="test-subtitle">Four different navigation approaches for Field Notes. Click to preview each style.</p>
+        </header>
+
+        <div class="test-nav-selector">
+            <button class="test-nav-btn active" data-nav="minimal">1. Minimal Inline</button>
+            <button class="test-nav-btn" data-nav="rail">2. Side Rail</button>
+            <button class="test-nav-btn" data-nav="index">3. Floating Index</button>
+            <button class="test-nav-btn" data-nav="command">4. Command Line</button>
+        </div>
+
+        <div class="test-description" id="description">
+            <h3>Minimal Inline</h3>
+            <p>Simple text links in a single row with no background. Clean, editorial feel that blends into the page. The navigation stays out of the way while remaining accessible.</p>
+        </div>
+
+        <div class="test-content">
+            <h2>Sample Content</h2>
+            <p>This is placeholder content to help visualize how the navigation interacts with page content. Scroll down to see how each navigation style behaves.</p>
+            <p>Field Notes is a working archive of systems, drafts, and field observations. Each navigation style offers a different approach to moving through the content.</p>
+            <p>The Minimal Inline approach prioritizes content by keeping navigation subtle. The Side Rail creates a persistent index. The Floating Index provides quick access without taking space. The Command Line offers keyboard-first navigation for power users.</p>
+            <p>Consider which approach best fits the editorial, archive nature of Field Notes.</p>
+        </div>
+    </div>
+
+    <script>
+        // Navigation switcher
+        const descriptions = {
+            minimal: {
+                title: 'Minimal Inline',
+                text: 'Simple text links in a single row with no background. Clean, editorial feel that blends into the page. The navigation stays out of the way while remaining accessible.'
+            },
+            rail: {
+                title: 'Side Rail',
+                text: 'Vertical navigation on the left side, always visible. Creates a persistent index feeling, perfect for an archive. On mobile, converts to a bottom bar.'
+            },
+            index: {
+                title: 'Floating Index',
+                text: 'A small floating button that expands into a navigation panel. Like a book\'s table of contents - click the button in the bottom right corner to try it.'
+            },
+            command: {
+                title: 'Command Line',
+                text: 'Ultra-minimal, keyboard-friendly command palette. Press "/" or click the hint at the bottom to open. Navigate with arrow keys, search, and use shortcuts.'
+            }
+        };
+
+        const buttons = document.querySelectorAll('.test-nav-btn');
+        const descEl = document.getElementById('description');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nav = btn.dataset.nav;
+
+                // Update active button
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update body class
+                document.body.className = `show-${nav}`;
+
+                // Update description
+                descEl.innerHTML = `
+                    <h3>${descriptions[nav].title}</h3>
+                    <p>${descriptions[nav].text}</p>
+                `;
+
+                // Close any open navs
+                document.querySelector('.nav-index')?.classList.remove('is-open');
+                document.querySelector('.nav-cmd')?.classList.remove('is-open');
+            });
+        });
+
+        // Floating Index toggle
+        const indexTrigger = document.querySelector('.nav-index__trigger');
+        const indexNav = document.querySelector('.nav-index');
+        const indexBackdrop = document.querySelector('.nav-index__backdrop');
+
+        indexTrigger?.addEventListener('click', () => {
+            indexNav.classList.toggle('is-open');
+        });
+
+        indexBackdrop?.addEventListener('click', () => {
+            indexNav.classList.remove('is-open');
+        });
+
+        // Command palette toggle
+        const cmdHint = document.querySelector('.nav-cmd__hint');
+        const cmdNav = document.querySelector('.nav-cmd');
+        const cmdBackdrop = document.querySelector('.nav-cmd__backdrop');
+        const cmdInput = document.querySelector('.nav-cmd__input');
+
+        function openCmd() {
+            cmdNav.classList.add('is-open');
+            setTimeout(() => cmdInput?.focus(), 100);
+        }
+
+        function closeCmd() {
+            cmdNav.classList.remove('is-open');
+        }
+
+        cmdHint?.addEventListener('click', openCmd);
+        cmdBackdrop?.addEventListener('click', closeCmd);
+
+        // Keyboard shortcuts for command palette
+        document.addEventListener('keydown', (e) => {
+            if (document.body.classList.contains('show-command')) {
+                if (e.key === '/' && !cmdNav.classList.contains('is-open')) {
+                    e.preventDefault();
+                    openCmd();
+                }
+                if (e.key === 'Escape' && cmdNav.classList.contains('is-open')) {
+                    closeCmd();
+                }
+            }
+        });
+
+        // Command palette item selection
+        const cmdItems = document.querySelectorAll('.nav-cmd__item');
+        let selectedIndex = 0;
+
+        cmdInput?.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedIndex = Math.min(selectedIndex + 1, cmdItems.length - 1);
+                updateSelection();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedIndex = Math.max(selectedIndex - 1, 0);
+                updateSelection();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                const item = cmdItems[selectedIndex];
+                const href = item?.dataset.href;
+                const action = item?.dataset.action;
+
+                if (action === 'theme') {
+                    toggleTheme();
+                } else if (href) {
+                    window.location.href = href;
+                }
+                closeCmd();
+            }
+        });
+
+        function updateSelection() {
+            cmdItems.forEach((item, i) => {
+                item.classList.toggle('is-selected', i === selectedIndex);
+            });
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+
+            // Update all theme icons
+            document.querySelectorAll('.nav-minimal__theme, .nav-rail__theme span:first-child, .nav-index__theme, .nav-cmd__theme').forEach(el => {
+                el.textContent = next === 'dark' ? '☀' : '☾';
+            });
+        }
+
+        document.querySelectorAll('.nav-minimal__theme, .nav-rail__theme, .nav-index__theme, .nav-cmd__theme').forEach(btn => {
+            btn.addEventListener('click', toggleTheme);
+        });
+    </script>
+</body>
+</html>

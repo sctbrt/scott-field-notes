@@ -16,6 +16,10 @@
     {
       "source": "/field-notes/:id",
       "destination": "/field-note.html"
+    },
+    {
+      "source": "/workbench",
+      "destination": "/workbench.html"
     }
   ],
   "headers": [
